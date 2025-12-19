@@ -14,9 +14,9 @@ public class Simpleencaps {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the password:");
         int inputPassword = sc.nextInt();
-        product p = new product(); // Create an instance of product
-        if(p.password == inputPassword) { // Access password through the instance
-            p.price = 100; // Set price to a valid value
+        product p = new product(); 
+        if(p.password == inputPassword) { 
+            p.price = 100; 
             if(p.price >= 0) {
                 System.out.println("The price is: $" + p.price);
             } else {
@@ -31,9 +31,9 @@ public class Simpleencaps {
 
     public static void main(String[] args) {
         Simpleencaps obj = new Simpleencaps();
-        product p = obj.new product(); // Create an instance of the inner class
-        p.setprice(150); // Set price using the setter method
-        obj.displayProduct(); // Call the method to display product details
+        product p = obj.new product(); 
+        p.setprice(150);
+        obj.displayProduct(); 
         
     }
       
