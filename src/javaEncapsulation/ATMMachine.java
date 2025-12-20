@@ -4,15 +4,13 @@ import java.util.Scanner;
 
 class ATM {
 
-    static int userid = 112112;
-    static String password = "Mukesh@123";
-
+    static int userid = 1212;
+    static String password = "mukesh123";
 
     private static int atmid;
-    private static String location;
-    private static int money;
+    private static String location = "Omalur Salem";
+    private static double money;
 
-  
     public static String checkLogin(int uid, String pass) {
         if (userid == uid && password.equals(pass)) {
             return "Correct";
@@ -20,22 +18,23 @@ class ATM {
         return "Wrong";
     }
 
-   
-    public static void setAtmId(Scanner sc) {
+    
+    public static void setAtmId() {
 
+        Scanner sc = new Scanner(System.in);
         int id = 0;
 
         while (id < 100000) {
-            System.out.print("Enter ATM ID : ");
+            System.out.print("Enter ATM ID: ");
             id = sc.nextInt();
 
             if (id < 100000) {
                 System.out.println("please enter Minimum 6-digit");
+            } else {
+                atmid = id;
+                System.out.println("ATM ID set successfully");
             }
         }
-
-        atmid = id;
-        System.out.println("ATM ID set successfully");
     }
 
     public static void checkAtmId() {
@@ -43,19 +42,39 @@ class ATM {
     }
 
     public static void setLocation(String loc) {
-        location = loc;
-        System.out.println("Location set successfully");
+        if (loc.length() > 10) {
+            location = loc;
+            System.out.println("Location set successfully");
+        } else {
+            System.out.println("Please enter location with District");
+        }
     }
 
     public static void checkLocation() {
         System.out.println("Location : " + location);
     }
 
-  
-    public static void addMoney(int amt) {
-        money = money + amt;
-        System.out.println("Money added");
-    }
+   
+    	public static void addMoney() {
+
+    	    Scanner sc = new Scanner(System.in);
+    	    double amt = 0;
+
+    	    while (amt <= 0) {
+
+    	        System.out.print("Enter amount to add: ");
+    	        amt = sc.nextDouble();
+
+    	        if (amt <=1000) {
+    	            System.out.println("Enter valid amount greater than 0");
+    	        } else {
+    	            money = money + amt;
+    	            System.out.println("Money added successfully");
+    	        }
+    	    }
+    	}
+
+    
 
     public static void checkMoney() {
         System.out.println("Money : " + money);
@@ -68,7 +87,6 @@ public class ATMMachine {
 
         Scanner sc = new Scanner(System.in);
 
-     
         System.out.print("Enter Userid: ");
         int uid = sc.nextInt();
 
@@ -80,6 +98,7 @@ public class ATMMachine {
 
         if (result.equals("Wrong")) {
             System.out.println("Wrong userid or password");
+            sc.close();
             return;
         }
 
@@ -98,48 +117,52 @@ public class ATMMachine {
 
             switch (choice) {
 
-                case 1:
-                    System.out.println("1. Set ATM ID");
-                    System.out.println("2. Check ATM ID");
-                    int a = sc.nextInt();
-                    if (a == 1) {
-                        ATM.setAtmId(sc);
-                    } else {
-                        ATM.checkAtmId();
-                    }
-                    break;
+            case 1:
+                System.out.println("1. Set ATM ID");
+                System.out.println("2. Check ATM ID");
+                int a = sc.nextInt();
 
-                case 2:
-                    System.out.println("1. Set Location");
-                    System.out.println("2. Check Location");
-                    int b = sc.nextInt();
-                    sc.nextLine();
-                    if (b == 1) {
-                        System.out.print("Enter Location: ");
-                        ATM.setLocation(sc.nextLine());
-                    } else {
-                        ATM.checkLocation();
-                    }
-                    break;
+                if (a == 1) {
+                    ATM.setAtmId();   
+                } else {
+                    ATM.checkAtmId();
+                }
+                break;
 
-                case 3:
-                    System.out.println("1. Add Money");
-                    System.out.println("2. Check Money");
-                    int c = sc.nextInt();
-                    if (c == 1) {
-                        System.out.print("Enter amount: ");
-                        ATM.addMoney(sc.nextInt());
-                    } else {
-                        ATM.checkMoney();
-                    }
-                    break;
+            case 2:
+                System.out.println("1. Set Location");
+                System.out.println("2. Check Location");
+                int b = sc.nextInt();
+                sc.nextLine();
 
-                case 4:
-                    System.out.println("Thank you");
-                    break;
+                if (b == 1) {
+                    System.out.print("Enter Location: ");
+                    String loca = sc.nextLine();
+                    ATM.setLocation(loca);
+                } else {
+                    ATM.checkLocation();
+                }
+                break;
 
-                default:
-                    System.out.println("Invalid choice");
+            case 3:
+                System.out.println("1. Add Money");
+                System.out.println("2. Check Money");
+                int c = sc.nextInt();
+
+                if (c == 1) {
+                   
+                    ATM.addMoney();
+                } else {
+                    ATM.checkMoney();
+                }
+                break;
+
+            case 4:
+                System.out.println("Thank you");
+                break;
+
+            default:
+                System.out.println("Invalid choice");
             }
         }
         sc.close();
